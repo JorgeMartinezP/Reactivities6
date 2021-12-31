@@ -30,11 +30,20 @@ const App = () => {
   const handleFormOpen = (id?: string) => {
     id ? handleSelectActivity(id) : handleCancelSelectActivity();
     setEditMode(true);
-  }
+  };
 
   const handleFormClose = () => {
     setEditMode(false);
-  }
+  };
+  
+  const handleCreateOrEditActivity = (activity: Activity) => {
+    activity.id 
+        ? setActivities([...activities.filter(x => x.id !== activity.id), activity])
+        : setActivities([...activities, activity ]);
+    setEditMode(false)    ;
+    setSelectedActivity(activity);
+
+  };
 
   return (
     <>
@@ -49,6 +58,7 @@ const App = () => {
           editMode={editMode}
           openForm={handleFormOpen}
           closeForm={handleFormClose}
+          createOrEdit={handleCreateOrEditActivity}
         />
       </Container>
     </>
