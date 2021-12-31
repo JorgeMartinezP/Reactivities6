@@ -49,7 +49,7 @@ const ActivityForm = ({activity : selectedActivity, closeForm, createOrEdit}: Pr
                 />
                 <Form.Input placeholder='Category'
                         value={activity.category}
-                        name='title' 
+                        name='category' 
                         onChange={handleInputChange}
                 />
 
