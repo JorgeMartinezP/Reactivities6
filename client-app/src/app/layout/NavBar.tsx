@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Container, Menu } from "semantic-ui-react";
 import useStore from "../stores/store";
 
-
 const NavBar = () => {
     const {activityStore} = useStore();
     
