@@ -3,18 +3,16 @@ import React, { useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import useStore from "../../../app/stores/store";
-import ActivityDetails from "../details/ActivityDetails";
-import ActivityForm from "../Form/ActivityForm";
 import ActivityList from "./ActivityList";
 
 const ActivityDashboard = () => {
 
     const {activityStore} = useStore();
-    const {selectedActivity, editMode } = activityStore;
+    const {loadActivities, activityRegistry} = activityStore;
 
     useEffect(() => {
-      activityStore.loadActivities();
-    },[activityStore]);
+      if (activityRegistry.size <= 1) loadActivities();
+    },[activityRegistry.size, loadActivities]);
   
     if (activityStore.loadingInitial) return <LoadingComponent content='' />;
 
@@ -24,13 +22,7 @@ const ActivityDashboard = () => {
                 <ActivityList />
             </Grid.Column>
             <Grid.Column width='6'>
-                {selectedActivity && !editMode &&
-                    <ActivityDetails />
-                }
-
-                {editMode &&
-                <ActivityForm />
-                }
+              <h2>Activity filters</h2>
             </Grid.Column>
         </Grid>
     );
